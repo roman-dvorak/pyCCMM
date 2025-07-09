@@ -1,0 +1,6 @@
+[submodule "CCMM"]
+	path = CCMM
+	url = git@github.com:techlib/CCMM.git
+[submodule "src/pyccmm/schemas/CCMM"]
+	path = src/pyccmm/schemas/CCMM
+	url = git@github.com:techlib/CCMM.git
