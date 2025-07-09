@@ -3,7 +3,7 @@
 Test file for validating CCMMMetadataHandler
 """
 
-from ccmm_metadata_handler import CCMMMetadataHandler
+from pyccmm.ccmm_metadata_handler import CCMMMetadataHandler
 
 def test_validation():
     handler = CCMMMetadataHandler()

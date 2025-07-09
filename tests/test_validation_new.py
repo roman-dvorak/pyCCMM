@@ -3,8 +3,8 @@
 Input validation test for the new CCMM Handler
 """
 
-from ccmm_handler import CCMMHandler
-from ccmm_models import *
+from pyccmm.ccmm_handler import CCMMHandler
+from pyccmm.ccmm_models import *
 
 def test_validation():
     print("=== Input validation test ===")

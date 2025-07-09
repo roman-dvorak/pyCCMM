@@ -435,72 +435,84 @@ class Dataset:
         """Convert to XML element according to XSD order"""
         elem = ET.Element("dataset")
         
-        # XSD order
+        # XSD order podle schema.xsd
+        # 1. iri (volitelné)
         if self.iri:
             iri_elem = ET.SubElement(elem, "iri")
             iri_elem.text = self.iri
         
-        # publication_year
+        # 2. publication_year (povinné)
         year_elem = ET.SubElement(elem, "publication_year")
         year_elem.text = str(self.publication_year)
         
-        # version
+        # 3. version (volitelné)
         if self.version:
             version_elem = ET.SubElement(elem, "version")
             version_elem.text = self.version
         
-        # title
+        # 4. title (povinné)
         title_elem = ET.SubElement(elem, "title")
         title_elem.text = self.title
         
-        # descriptions
+        # 5. has_description (volitelné, více)
         for desc in self.descriptions:
             elem.append(desc.to_xml_element())
         
-        # alternate_titles
+        # 6. alternate_title (volitelné, více)
         for alt_title in self.alternate_titles:
             elem.append(alt_title.to_xml_element())
         
-        # metadata_records
+        # 7. is_described_by (povinné, více) - metadata records
         for record in self.metadata_records:
             elem.append(record.to_xml_element())
         
-        # identifiers
+        # 8. identifier (povinné, více)
         for identifier in self.identifiers:
             elem.append(identifier.to_xml_element())
         
-        # locations
+        # 9. location (volitelné, více)
         for location in self.locations:
             elem.append(location.to_xml_element())
         
-        # qualified_relations (minOccurs=2)
+        # 10. provenance (volitelné, více) - zatím neimplementováno
+        
+        # 11. qualified_relation (povinné, minimum 2, více)
         for relation in self.qualified_relations:
             elem.append(relation.to_xml_element())
         
-        # time_references
+        # 12. time_reference (povinné, více)
         for time_ref in self.time_references:
             elem.append(time_ref.to_xml_element())
         
-        # subjects
+        # 13. subject (povinné, více)
         for subject in self.subjects:
             elem.append(subject.to_xml_element())
         
-        # distributions
+        # 14. validation_result (volitelné, více) - zatím neimplementováno
+        
+        # 15. distribution (volitelné, více)
         for distribution in self.distributions:
             elem.append(distribution.to_xml_element())
         
-        # terms_of_use (required)
+        # 16. funding_reference (volitelné, více) - zatím neimplementováno
+        
+        # 17. terms_of_use (povinné)
         elem.append(self.terms_of_use.to_xml_element())
         
-        # languages
-        if self.primary_language:
-            lang_elem = ET.SubElement(elem, "primary_language")
-            lang_iri = ET.SubElement(lang_elem, "iri")
-            lang_iri.text = self.primary_language.value
+        # 18. related_resource (volitelné, více) - zatím neimplementováno
         
+        # 19. resource_type (volitelné) - zatím neimplementováno
+        
+        # 20. other_language (volitelné, více)
         for lang in self.other_languages:
             lang_elem = ET.SubElement(elem, "other_language")
             lang_iri = ET.SubElement(lang_elem, "iri")
             lang_iri.text = lang.value
+        
+        # 21. primary_language (volitelné)
+        if self.primary_language:
+            lang_elem = ET.SubElement(elem, "primary_language")
+            lang_iri = ET.SubElement(lang_elem, "iri")
+            lang_iri.text = self.primary_language.value
         
         return elem

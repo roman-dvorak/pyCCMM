@@ -3,8 +3,8 @@
 Test XSD validation
 """
 
-from ccmm_handler import CCMMHandler
-from ccmm_models import *
+from pyccmm.ccmm_handler import CCMMHandler
+from pyccmm.ccmm_models import *
 from datetime import date
 
 def test_xsd_validation():
@@ -35,9 +35,15 @@ def test_xsd_validation():
     print(f"\nXML (first 800 characters):")
     print(xml_content[:800])
     
-    # Save for manual check
-    handler.save_to_file("xsd_test.xml")
-    print("\n✅ XML saved to 'xsd_test.xml'")
+    # Save for manual check (only if valid)
+    if is_valid:
+        handler.save_to_file("xsd_test.xml")
+        print("\n✅ XML saved to 'xsd_test.xml'")
+    else:
+        # Save even if invalid for debugging
+        with open("xsd_test.xml", "w") as f:
+            f.write(xml_content)
+        print("\n⚠️  XML saved to 'xsd_test.xml' (invalid but saved for debugging)")
 
 if __name__ == "__main__":
     test_xsd_validation()

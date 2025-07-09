@@ -3,8 +3,8 @@
 Comprehensive test of the CCMM handler
 """
 
-from ccmm_handler import CCMMHandler
-from ccmm_models import *
+from pyccmm.ccmm_handler import CCMMHandler
+from pyccmm.ccmm_models import *
 from datetime import date
 
 def create_full_dataset():

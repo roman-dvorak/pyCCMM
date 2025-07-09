@@ -3,8 +3,8 @@
 Test of the new CCMM Handler with Python objects
 """
 
-from ccmm_handler import CCMMHandler
-from ccmm_models import *
+from pyccmm.ccmm_handler import CCMMHandler
+from pyccmm.ccmm_models import *
 from datetime import date
 
 
